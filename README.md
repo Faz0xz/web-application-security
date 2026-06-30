@@ -9,9 +9,13 @@ Organized by vulnerability class, not by platform. Each lab notes its source (Po
 but the folder structure reflects the vulnerability type, since the same class of bug shows up across multiple platforms over time.
 
 xss/           Cross-site scripting — reflected, stored, DOM-based
+
 sqli/          SQL injection
+
 ssrf/          Server-side request forgery
+
 fundamentals/  Browser parsing, DOM, source/sink theory
+
 
 Each write-up focuses on understanding browser behavior, parser contexts, data flow, and exploitation techniques rather than memorizing payloads.
 
