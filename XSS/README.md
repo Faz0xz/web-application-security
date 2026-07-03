@@ -20,10 +20,10 @@ The objective of these notes is to develop the ability to:
 
 # XSS Investigation Methodology
 
-Every XSS assessment follows the same investigation process.
+After performing various labs I came up with this methodology which I apply to each lab to find and exploit an XSS vulnerability. 
 
 ```text
-Attacker Input
+ Input  Source
       │
       ▼
 Identify the Source
@@ -244,3 +244,5 @@ Instead, it is about understanding:
 - which parser interprets it,
 - what syntax that parser expects,
 - and why the browser eventually executes JavaScript.
+
+For the Portswigger XSS Labs I've found that z3nsh3ll has great detailed breakdowns of each lab and the context behind the lab env which leads to the XSS vulnerability to exist. Z3nsh3ll yt: https://www.youtube.com/@z3nsh3ll
