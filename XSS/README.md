@@ -245,4 +245,9 @@ Instead, it is about understanding:
 - what syntax that parser expects,
 - and why the browser eventually executes JavaScript.
 
-For the Portswigger XSS Labs I've found that z3nsh3ll has great detailed breakdowns of each lab and the context behind the lab env which leads to the XSS vulnerability to exist. Z3nsh3ll yt: https://www.youtube.com/@z3nsh3ll
+## 📚 Recommended Resources
+
+### PortSwigger XSS Labs
+
+- **z3nsh3ll** – Detailed explanations of PortSwigger labs, browser behavior, and the underlying vulnerability mechanics.
+  - **YouTube:** [@z3nsh3ll](https://www.youtube.com/@z3nsh3ll)
