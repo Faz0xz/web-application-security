@@ -75,7 +75,7 @@ displaySearchResults() renders output into DOM
 ## Inspecting the Server Response
 
 Opening Burp Suite and checking the HTTP response for the search request
-revealed the server returns JSON:
+revealed the server returns JSON, this can also be done via developer tools in the browsers by sending the request and looking for it in the network tab:
 
 ```json
 {"results":[],"searchTerm":"a' <img src=\"0\" onerror=alert()"}
