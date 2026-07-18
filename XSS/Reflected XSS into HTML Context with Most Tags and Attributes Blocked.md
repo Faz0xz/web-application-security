@@ -126,7 +126,6 @@ onresize fires → print() executes automatically in victim's browser
 
 | Fragment | Role |
 |---|---|
-| `">`  | Escapes surrounding HTML attribute context |
 | `<body` | Allowed tag — connected to window object, responds to viewport resize |
 | `onresize=print()` | Allowed attribute — fires when viewport/iframe resizes |
 | `onload=this.style.width='100px'` | On the iframe — triggers the resize that fires onresize |
