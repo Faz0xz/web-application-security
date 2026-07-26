@@ -2,7 +2,7 @@
 
 **Platform:** Hack The Box CTF  
 **Category:** Web  
-**Difficulty:** Practitioner  
+**Difficulty:** very easy  
 
 ## Objective
 
