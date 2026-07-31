@@ -1,7 +1,9 @@
 # Stored XSS with CSP Bypass via JSONP — Medieval Messaging App ("Rookery")
 
 **Platform:** Hack The Box CTF Cyber Apocalypse 2026 The Salt Crown
+
 **Category:** Web
+
 **Difficulty:** easy
 
 ## Objective
