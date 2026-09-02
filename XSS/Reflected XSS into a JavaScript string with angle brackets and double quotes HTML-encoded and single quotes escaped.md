@@ -1,10 +1,14 @@
-# Reflected XSS into a JavaScript String
+# Reflected XSS into a JavaScript string with single quote and backslash escaped
 
-**PortSwigger Lab — Reflected XSS into a JavaScript string with single quote and backslash escaped**
+**Source:** PortSwigger Web Security Academy  
+**Category:** Reflected XSS  
+**Difficulty:** Practitioner  
 
 ## Objective
 
-The goal of this lab was to exploit a reflected XSS vulnerability where user input is reflected inside a JavaScript string. The application applies inconsistent encoding to different characters:
+This lab contains a reflected cross-site scripting vulnerability in the search query tracking functionality where angle brackets and double are HTML encoded and single quotes are escaped.
+
+To solve this lab, perform a cross-site scripting attack that breaks out of the JavaScript string and calls the alert function. 
 
 | Character | Handling |
 |---|---|
