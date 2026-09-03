@@ -55,7 +55,7 @@ Payload
 
 The final payload was submitted in the comment author's website field:
 
-http://post?&apos;-alert()-&apos;
+` http://post?&apos;-alert()-&apos; `
 
 Breakdown:
 
