@@ -8,11 +8,9 @@
 
 This lab contains a stored cross-site scripting vulnerability in the comment functionality. To solve this lab, submit a comment that calls the `alert()` function when the comment author name is clicked. 
 
-Initial Analysis
+## Initial Analysis
 
-The application features a blog post where users can submit comments. The comment author's name is rendered as a clickable element wired to an onclick event handler that embeds the author's website URL.
-
-This means the input is placed inside a JavaScript context (an inline event handler), not simply reflected as HTML text.
+The application features a blog post where users can submit comments. The comment author's name is rendered as a clickable element wired to an onclick event handler that embeds the author's website URL. This means the input is placed inside a JavaScript context (an inline event handler), not simply reflected as HTML text.
 
 The lab description states that:
 
@@ -22,26 +20,19 @@ Character	Handling
 '	Escaped
 \	Escaped
 
-Because the input lands inside a JavaScript string within the onclick attribute, the first step is to determine how the application handles characters that could be used to break out of that string.
+Because the input lands inside a JavaScript string within the onclick attribute, the first step is to determine how the application handles characters that could be used to break out of that string. Since single quotes are escaped, a direct attempt to terminate the JavaScript string with a literal quote fails. For example:
 
-Testing the Input
-
-Since single quotes are escaped, a direct attempt to terminate the JavaScript string with a literal quote fails. For example:
-
-'-alert()-'
+`'-alert()-'`
 
 The single quotes here get escaped by the application before being reflected, so the string context is never broken.
 
 Backslashes are escaped as well, so the classic technique of using a backslash to interfere with the application's escaping logic (as in the reflected XSS-into-JS-string case) doesn't work here either.
 
-The key insight is that the input passes through two separate parsing stages:
+The key process is that the input passes through two separate parsing stages:
 
-HTML parsing — the browser first parses the page as HTML, decoding any HTML entities it encounters.
-JavaScript parsing — the decoded attribute value is then parsed and executed as JavaScript when the onclick fires.
+HTML parsing — the browser first parses the page as HTML, decoding any HTML entities it encounters. JavaScript parsing — the decoded attribute value is then parsed and executed as JavaScript when the onclick fires. The application's filters only account for literal characters not for characters supplied as HTML entities, which get decoded by the HTML parser before the JavaScript parser ever sees them.
 
-The application's filters only account for literal characters — not for characters supplied as HTML entities, which get decoded by the HTML parser before the JavaScript parser ever sees them.
-
-Bypassing the Escaping
+## Bypassing the Escaping
 
 Instead of submitting a literal single quote, I submitted its HTML entity equivalent:
 
@@ -51,7 +42,7 @@ Because this is an HTML entity rather than a literal ' character, the applicatio
 
 This effectively smuggles a real single quote through the filter, allowing me to break out of the JavaScript string.
 
-Payload
+## Payload
 
 The final payload was submitted in the comment author's website field:
 
@@ -66,7 +57,7 @@ Segment	Purpose
 
 The - (minus) operators are used instead of ; to keep everything within a single valid JavaScript expression, since the onclick attribute's value is parsed as an expression rather than a full statement block. Using subtraction is a common trick to concatenate an injected call with surrounding string literals without breaking syntax.
 
-Resulting Behavior
+## Resulting Behavior
 
 Conceptually, the vulnerable markup looks like:
 
@@ -80,7 +71,7 @@ viewProfile(''-alert()-'')
 
 Which the JavaScript engine evaluates as: close the empty string, subtract the result of alert() (which pops the alert first), then subtract another empty string — resulting in NaN, but not before alert() has already executed as a side effect.
 
-Root Cause
+## Root Cause
 
 The vulnerability stems from unsafe insertion of user-controlled data into an inline JavaScript event handler (onclick). Although the application attempted to sanitize input by escaping certain literal characters, this escaping did not account for the fact that the data passes through multiple parsing contexts before execution:
 
@@ -108,8 +99,8 @@ html
 
 use JavaScript event listeners that keep user-controlled data separate from executable code:
 
-javascript
-  element.addEventListener('click', () => viewProfile(safeUserValue));
+`element.addEventListener('click', () => viewProfile(safeUserValue));`
+
 Apply encoding that accounts for all parsing stages the data will pass through, not just the outermost one — a filter must be aware that HTML entity decoding happens before JavaScript execution.
 Prefer setting data via safe DOM properties (textContent, dataset) and reading it back in the handler, rather than string-interpolating it into inline script.
 Deploy a restrictive Content Security Policy that disallows inline event handlers and inline scripts.
