@@ -1,4 +1,4 @@
-# Reflected XSS with Some SVG Tags Allowed
+# Reflected XSS with event handlers and 'href' attributes blocked
 
 **Platform:** PortSwigger Web Security Academy  
 **Vulnerability:** Reflected Cross-Site Scripting (XSS)  
